@@ -1,0 +1,86 @@
+###Test 1###
+GET http://localhost:8000/
+
+
+###Test 2###
+GET http://localhost:8000/api/books
+
+###Test 3a###
+GET http://localhost:8000/api/books?q=clean
+
+###Test 3b###
+GET http://localhost:8000/api/books?limit=2
+
+###Test 4a###
+GET http://localhost:8000/api/books/1 → 200
+
+###Test 4b###
+GET http://localhost:8000/api/books/999 → 404 with { "error": "Book 999 not found" }
+
+###Test 5###
+POST http://localhost:8000/api/books
+Content-Type: application/json
+
+{ "title": "JavaScript Everywhere", "author": "Adam D. Scott", "year": 2020 }
+
+
+###Test 6###
+POST http://localhost:8000/api/books
+Content-Type: application/json
+
+{ "title": "Just a title" }
+
+### Test 7 — Update a book
+PUT http://localhost:8000/api/books/1
+Content-Type: application/json
+
+{ 
+  "year": 2009 
+}
+
+### Test 7b — Delete a book
+DELETE http://localhost:8000/api/books/2
+
+
+### Test 8 ###
+POST http://localhost:8000/api/reset
+Expected: 200 { "message": "Data reset to seed", "count": 4 }
+
+
+###Test 9###
+
+GET http://localhost:8000/api/books
+
+### Task 10 — Request Non-existent Book ID
+GET http://localhost:8000/api/books/999
+
+
+### Task 11 — Create Book and Check Location Header
+POST http://localhost:8000/api/books
+Content-Type: application/json
+
+{
+  "title": "Clean Architecture",
+  "author": "Robert C. Martin",
+  "year": 2017,
+  "genre": "Software Engineering"
+}
+
+
+### Task 12 — Test Validation Failure
+POST http://localhost:8000/api/books
+Content-Type: application/json
+
+{
+  "title": "Missing author and bad year",
+  "year": 950
+}
+
+
+### Task 13 — Test CORS Headers
+GET http://localhost:8000/api/books
+Origin: http://localhost:5173
+
+
+### Task 14 — Test Refactored Controller Health Route
+GET http://localhost:8000/
