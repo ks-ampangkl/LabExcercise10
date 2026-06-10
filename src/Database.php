@@ -4,8 +4,7 @@ namespace App;
 use PDO; 
 use PDOException; 
   
-final class Database
-{ 
+final class Database{ 
     private static ?PDO $pdo = null; 
   
     public static function get(): PDO 

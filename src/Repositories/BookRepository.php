@@ -29,7 +29,8 @@ final class BookRepository
         $row = $stmt->fetch(); 
         return $row === false ? null : $row; 
     } 
- public function create(array $b): int { 
+
+     public function create(array $b): int { 
         $sql = 'INSERT INTO books (title, author, year, genre) 
                 VALUES (:title, :author, :year, :genre)'; 
         $this->pdo->prepare($sql)->execute([ 
@@ -41,7 +42,8 @@ final class BookRepository
   
     public function update(int $id, array $b): int { 
         $sets = [];  $args = [':id' => $id];
-        foreach (['title','author','genre'] as $f) { 
+
+         foreach (['title','author','genre'] as $f) { 
             if (array_key_exists($f, $b)) { $sets[] = "$f=:$f"; $args[":$f"] = trim($b[$f]); } 
         } 
         if (array_key_exists('year', $b)) { $sets[] = 'year=:year'; $args[':year'] = 

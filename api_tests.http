@@ -8,17 +8,25 @@ GET http://localhost:8000/api/books?q=clean
 ###Test 2b###
 GET http://localhost:8000/api/books?limit=2      
 
-###Test 3###
+###Test 3a###
 POST http://localhost:8000/api/books 
+Content-Type: application/json   
 
-Content-Type: application/json 
-  
 { "title":"Refactoring", "author":"Martin Fowler", "year":2018 } 
 
+
+
 ###Test 4a###
-PUT    http://localhost:8000/api/books/1   { "genre": "Software Craftsmanship" }   
+PUT http://localhost:8000/api/books/1   { "genre": "Software Craftsmanship" }   
 
 ###Test 4b###
 DELETE http://localhost:8000/api/books/2  
 
+
+###SQL Injection###
+GET http://localhost:8000/api/books/1%20OR%201=1 
+
+
+###SQL Injection 2###
+GET http://localhost:8000/api/books?q='%20OR%20'1'='1 
 
